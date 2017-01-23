@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5DBEB8F6E6FECD5BD0D8007A5D76FFE10F66DB6B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C37755879D30E8C4D2BE2FC1842F22AC191352FA" : 0,
+    "5DBEB8F6E6FECD5BD0D8007A5D76FFE10F66DB6B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0DA2AEF6-2D7F-4354-AEF8-B25EEABAED92",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C37755879D30E8C4D2BE2FC1842F22AC191352FA" : "Bass\/Bass\/",
+    "5DBEB8F6E6FECD5BD0D8007A5D76FFE10F66DB6B" : "Touch\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Touch",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Touch.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nikhil-dharmaraj\/Touch.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5DBEB8F6E6FECD5BD0D8007A5D76FFE10F66DB6B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nikhil-dharmaraj\/Bass.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C37755879D30E8C4D2BE2FC1842F22AC191352FA"
+    }
+  ]
+}
