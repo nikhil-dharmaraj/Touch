@@ -28,13 +28,18 @@ class InboxMessageTableViewCell: UITableViewCell {
                     self.thankButton.isUserInteractionEnabled = !self.thankButton.isSelected
                 }
                 let user = message["fromUser"] as! PFUser
-                let number = String(describing: user["username"])
-                var text: String = "\(number) sent you a"
-                for contact in ContactsHelper.instance.contacts {
-                    if contact.number == number {
-                        text = "\(contact.name) sent you a"
-                    }
-                }
+                
+                //                let number = String(describing: user["username"])
+                //                var text: String = "\(number) sent you a"
+                //                for contact in ContactsHelper.instance.contacts {
+                //                    if contact.number == number {
+                //                        text = "\(contact.name) sent you a"
+                //                    }
+                //                }
+
+                
+                let name = user["additional"] as! String
+                let text: String = "\(name) sent you a"
                 self.contactInfo.text = text
                   message.saveInBackground()
             }
