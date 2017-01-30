@@ -17,7 +17,9 @@ class MessageHelper {
         let twilioSID = "AC64db74214cbf7981b2605b239107b14e"
         let twilioSecret = "a8ae8b0b9c808be291c81f2fac85063d"
         let fromNumber = "4156550854"
-        let message = "\(PFUser.current()!["additional"]) sent you this message on Touch! Download the app to check it out at https://itunes.apple.com/app/id1138385750"
+        let user = PFUser.current()!
+        let message = "\(user["additional"]!) sent you this message on Touch! Download the app to check it out at https://itunes.apple.com/app/id1138385750"
+        
         let mediaUrl = "https://sites.google.com/a/neobyapps.com/images/images/\(imageName).png"
         // Build the request
         
@@ -37,8 +39,6 @@ class MessageHelper {
                 print("Error: \(error)")
             }
         }).resume()
-        
-        
         
     }
    

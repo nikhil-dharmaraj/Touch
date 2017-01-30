@@ -10,7 +10,7 @@
 import UIKit
 import Parse
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var constraint: NSLayoutConstraint!
@@ -24,6 +24,11 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(ComposeViewController.pan(_:))))
+        imageView.addGestureRecognizer(panGesture)
+        imageView.isUserInteractionEnabled = true
+        panGesture.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +70,7 @@ class ComposeViewController: UIViewController {
         self.label.text = ""
         self.button.isHidden = true
         self.button2.isHidden = true
-        UIView.animate (withDuration: 2, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+        UIView.animate (withDuration: 1.6, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                 self.imageView.transform = CGAffineTransform.identity
                 }, completion: {(bool: Bool) in
@@ -139,6 +144,15 @@ class ComposeViewController: UIViewController {
             destination.recipient = self.randomContact
         }
     }
+    
+    @IBAction func pan(_ sender: UIPanGestureRecognizer) {
+        
+        if sender.state == .ended {
+            self.spin()
+        }
+    }
+    
+
 
     /*
     // MARK: - Navigation
@@ -150,6 +164,12 @@ class ComposeViewController: UIViewController {
     }
     */
 
+}
+
+extension CGPoint {
+    func hypotenuse() -> CGFloat {
+        return sqrt(self.x * self.x + self.y * self.y)
+    }
 }
 
 public extension UIDevice {
@@ -173,3 +193,4 @@ public extension UIDevice {
     }
     
 }
+

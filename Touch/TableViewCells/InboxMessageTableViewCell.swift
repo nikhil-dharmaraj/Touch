@@ -29,7 +29,7 @@ class InboxMessageTableViewCell: UITableViewCell {
                 }
                 let user = message["fromUser"] as! PFUser
                 
-                //                let number = String(describing: user["username"])
+                //                let number = user["username"]
                 //                var text: String = "\(number) sent you a"
                 //                for contact in ContactsHelper.instance.contacts {
                 //                    if contact.number == number {
