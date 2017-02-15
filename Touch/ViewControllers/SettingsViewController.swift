@@ -12,15 +12,16 @@ import ParseUI
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var accessButton: UIButton!
+ 
     
     @IBOutlet weak var logOutButton: UIButton!
+   
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.accessButton.layer.borderWidth = 1
         self.accessButton.layer.borderColor = self.accessButton.currentTitleColor.cgColor
-        self.logOutButton.layer.borderWidth = 1
-        self.logOutButton.layer.borderColor = self.accessButton.currentTitleColor.cgColor
+        
         // Do any additional setup after loading the view.
     }
 
