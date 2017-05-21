@@ -150,7 +150,6 @@ open class TimelineComponent <T: Equatable, S: TimelineComponentTarget> : Refres
     
     func loadMore() {
         let additionalRange:Range<Int> = (currentRange.upperBound ..< currentRange.upperBound + target!.additionalRangeSize)
-        
         target!.loadInRange(additionalRange) { posts in
             let newPosts = posts
             

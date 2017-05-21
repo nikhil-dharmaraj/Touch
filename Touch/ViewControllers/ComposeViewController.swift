@@ -9,10 +9,12 @@
 
 import UIKit
 import Parse
+import ARSLineProgress
 
 class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var tapLabel: UILabel!
     @IBOutlet weak var constraint: NSLayoutConstraint!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!
@@ -23,12 +25,13 @@ class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         
-        let panGesture = UIPanGestureRecognizer(target: self, action:(#selector(ComposeViewController.pan(_:))))
-        imageView.addGestureRecognizer(panGesture)
+        let spinGesture = UIPanGestureRecognizer(target: self, action:(#selector(ComposeViewController.spin(_:))))
+        imageView.addGestureRecognizer(spinGesture)
         imageView.isUserInteractionEnabled = true
-        panGesture.delegate = self
+        spinGesture.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,11 +48,7 @@ class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func deleteButtonPressed(_ sender: AnyObject) {
         self.showAlertTwo()
     }
-    
-  
-    @IBAction func spinButtonPressed(_ sender: AnyObject) {
-        self.spin()
-    }
+
     
     func revert() {
         self.imageView.isHidden = false
@@ -59,6 +58,7 @@ class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
         self.label.text = ""
     }
     
+
     func spin() {
         let user = PFUser.current()!
         if user["firstSpin"] == nil {
@@ -70,7 +70,7 @@ class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
         self.label.text = ""
         self.button.isHidden = true
         self.button2.isHidden = true
-        UIView.animate (withDuration: 1.6, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: {
+        UIView.animate (withDuration: 1.57, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: {
                 self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                 self.imageView.transform = CGAffineTransform.identity
                 }, completion: {(bool: Bool) in
@@ -145,7 +145,7 @@ class ComposeViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @IBAction func pan(_ sender: UIPanGestureRecognizer) {
+    func spin(_ sender: UITapGestureRecognizer) {
         
         if sender.state == .ended {
             self.spin()

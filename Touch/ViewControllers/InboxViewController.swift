@@ -9,9 +9,11 @@
 import UIKit
 import Parse
 import ConvenienceKit
+import ARSLineProgress
 
 
 class InboxViewController: UIViewController, TimelineComponentTarget {
+    
     typealias ContentType = PFObject
 
     var timelineComponent: TimelineComponent<PFObject, InboxViewController>!
@@ -26,10 +28,19 @@ class InboxViewController: UIViewController, TimelineComponentTarget {
         // Do any additional setup after loading the view.
     }
     
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         timelineComponent.loadInitialIfRequired()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if ParseHelper.queryChanged == nil {
+            ViewControllersHelper.checkIfMessagesFromInbox(viewController: self)
+        }
+        if ParseHelper.queryChanged == true {
+            tableView.reloadData()
+            ParseHelper.queryChanged = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,16 +92,16 @@ class InboxViewController: UIViewController, TimelineComponentTarget {
 extension InboxViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if timelineComponent.content.count == 0 {
+        if ParseHelper.hasMessages == false {
             tableView.isHidden = true
-            self.label.text = "You have no messages!"
+            label.text = "You have no messages!"
             return 0
         }
+        label.text = ""
         tableView.isHidden = false
-        self.label.text = ""
         return timelineComponent.content.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.isHidden = false
         let cell = tableView.dequeueReusableCell(withIdentifier: "inboxMessage") as! InboxMessageTableViewCell

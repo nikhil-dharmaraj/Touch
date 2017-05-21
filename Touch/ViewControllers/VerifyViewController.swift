@@ -73,6 +73,7 @@ class VerifyViewController: UIViewController {
                     PFUser.logInWithUsername (inBackground: formattedString, password: "##", block: { (user: PFUser?, error: Error?) in
                         if error == nil {
                             self.performSegue (withIdentifier: "toTab", sender: self)
+                            ViewControllersHelper.checkIfMessages()
                             ContactsHelper.instance.refreshContacts()
                         }
                         else {

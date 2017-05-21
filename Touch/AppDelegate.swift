@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let configuration = ParseClientConfiguration {
             $0.applicationId = "sKteVapuJBXvn5d0EU49ZFoeTr8S4mpbcVVBVTOj"
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Parse.initialize(with: configuration)
         PFUser.enableRevocableSessionInBackground()
-        self.presentLogin()
+        self.presentLoginLaunch(launchOptions: launchOptions)
         return true
 
     }
@@ -58,12 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let startViewController: UIViewController
         
+        
         if (user != nil) {
             // 3
             // if we have a user, set the TabBarController to be the initial view controller
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             startViewController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
             AppDelegate.register()
+            ViewControllersHelper.checkIfMessages()
             ContactsHelper.instance.refreshContacts()
         } else {
             // 4
@@ -94,8 +96,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
-
+        
     }
+
+    func presentLoginLaunch(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        
+        // check if we have logged in user
+        // 2
+        let user = PFUser.current()
+        
+        var startViewController: UIViewController
+        
+        let keyExists = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] != nil
+        
+        
+        if (user == nil) {
+            // 4
+            // Otherwise set the LoginViewController to be the first
+            let loginViewController = LogInViewController()
+            loginViewController.fields = [.usernameAndPassword, .signUpButton, .logInButton]
+            loginViewController.delegate = parseLoginHelper
+            loginViewController.logInView?.usernameField?.placeholder = "Phone Number"
+            loginViewController.logInView?.passwordField?.isHidden = true
+            loginViewController.signUpController = PFSignUpViewController()
+            loginViewController.signUpController?.delegate = parseLoginHelper
+            loginViewController.signUpController?.fields = [.additional, .signUpButton, .dismissButton]
+            loginViewController.signUpController?.signUpView?.additionalField?.placeholder = "Full Name"
+            loginViewController.signUpController?.signUpView?.passwordField?.isHidden = true
+            loginViewController.signUpController?.signUpView?.usernameField?.placeholder = "Phone Number"
+            let label = UILabel()
+            label.text = "TOUCH"
+            label.textColor = UIColor.lightGray
+            label.font = UIFont(name: label.font.fontName, size: 60)
+            label.sizeToFit()
+            loginViewController.signUpController?.signUpView?.logo = label
+            
+            
+            startViewController = loginViewController
+        } else if (keyExists) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            var BaseTabBarViewController: BaseTabBarViewController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! BaseTabBarViewController
+            BaseTabBarViewController.defaultIndex = 0
+            startViewController = BaseTabBarViewController
+            AppDelegate.register()
+            ViewControllersHelper.checkIfMessages()
+            ContactsHelper.instance.refreshContacts()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            var BaseTabBarViewController: BaseTabBarViewController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! BaseTabBarViewController
+            startViewController = BaseTabBarViewController
+            AppDelegate.register()
+            ViewControllersHelper.checkIfMessages()
+            ContactsHelper.instance.refreshContacts()
+        }
+        
+        // 5
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = startViewController
+        self.window?.makeKeyAndVisible()
+        
+    }
+    
+    
     
     static func register() {
         let types: UIUserNotificationType = [.alert, .badge, .sound]
@@ -103,8 +165,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let application = UIApplication.shared
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-
+        
     }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -146,6 +209,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return true
     }
+    
+    
     
 }
 

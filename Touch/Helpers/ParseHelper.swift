@@ -13,6 +13,14 @@ import ARSLineProgress
 
 class ParseHelper {
     
+    static var hasMessages: Bool = false {
+        didSet {
+            queryChanged = true
+        }
+    }
+    
+    static var queryChanged: Bool?
+    
     static func saveMessage(_ toUser: Contact, image: UIImage, controller: UIViewController, imageName: String)  {
         ARSLineProgress.showWithProgressObject(Progress())
         let query = PFUser.query()!
@@ -38,7 +46,7 @@ class ParseHelper {
                         DispatchQueue.main.async {
                             ARSLineProgress.updateWithProgress(1.0)
                             ARSLineProgress.showSuccess()
-                            controller.performSegue(withIdentifier: "toInbox", sender: controller)
+                            controller.performSegue(withIdentifier: "toCompose", sender: controller)
                         }
                     }
                 })
@@ -65,9 +73,21 @@ class ParseHelper {
         let messageQuery = PFQuery(className: "Message")
         messageQuery.whereKey("toUser", equalTo: PFUser.current()!)
         messageQuery.includeKey("fromUser")
+        messageQuery.includeKey("alreadyRead")
         messageQuery.order(byDescending: "createdAt")
         messageQuery.skip = range.lowerBound
         messageQuery.limit = range.upperBound - range.lowerBound
+        messageQuery.findObjectsInBackground { (results, error) in
+            block(results)
+        }
+    }
+    
+    static func getMessageCount(block: @escaping (_ results:[PFObject]?) -> Void) {
+        let messageQuery = PFQuery(className: "Message")
+        messageQuery.whereKey("toUser", equalTo: PFUser.current()!)
+        messageQuery.includeKey("fromUser")
+        messageQuery.includeKey("alreadyRead")
+        messageQuery.order(byDescending: "createdAt")
         messageQuery.findObjectsInBackground { (results, error) in
             block(results)
         }

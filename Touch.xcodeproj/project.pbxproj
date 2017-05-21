@@ -14,6 +14,7 @@
 		310157501D357208001467DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3101574E1D357208001467DE /* LaunchScreen.storyboard */; };
 		3105C3371E12241700CEF4A4 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105C3361E12241700CEF4A4 /* VerifyViewController.swift */; };
 		311E89A61D41ACDC00E8E5CC /* MessageChoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E89A51D41ACDC00E8E5CC /* MessageChoiceCollectionViewCell.swift */; };
+		3179222B1E903FF30034D508 /* BaseTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3179222A1E903FF30034D508 /* BaseTabBarViewController.swift */; };
 		3186C4FD1D38371900042FAA /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3186C4FC1D38371900042FAA /* Contact.swift */; };
 		3187551D1D4069DD00D98F76 /* ContactsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318755171D4069DD00D98F76 /* ContactsHelper.swift */; };
 		3187551E1D4069DD00D98F76 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318755181D4069DD00D98F76 /* ErrorHandling.swift */; };
@@ -52,6 +53,7 @@
 		310157511D357208001467DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3105C3361E12241700CEF4A4 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		311E89A51D41ACDC00E8E5CC /* MessageChoiceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageChoiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		3179222A1E903FF30034D508 /* BaseTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarViewController.swift; sourceTree = "<group>"; };
 		3186C4FC1D38371900042FAA /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		318755171D4069DD00D98F76 /* ContactsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsHelper.swift; sourceTree = "<group>"; };
 		318755181D4069DD00D98F76 /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				31B9823E1D41387400350C22 /* LogInViewController.swift */,
 				31998E7E1D4472FA001E9782 /* ComposeViewController.swift */,
 				3105C3361E12241700CEF4A4 /* VerifyViewController.swift */,
+				3179222A1E903FF30034D508 /* BaseTabBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				3A233C621E1F17FF0077A95A /* MessageHelper.swift in Sources */,
 				3198794C1D359EFE00AC8440 /* InboxViewController.swift in Sources */,
 				3A0DB9771E1EEDC5007EA1B9 /* ParseLoginHelper.swift in Sources */,
+				3179222B1E903FF30034D508 /* BaseTabBarViewController.swift in Sources */,
 				3105C3371E12241700CEF4A4 /* VerifyViewController.swift in Sources */,
 				319879531D359F7700AC8440 /* InboxMessageTableViewCell.swift in Sources */,
 				319879571D35B39A00AC8440 /* ChooseMessageViewController.swift in Sources */,

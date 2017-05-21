@@ -15,4 +15,21 @@ class ViewControllersHelper {
     static let notificationAmountOfHours = 24
     static let notificationRepeatInterval = NSCalendar.Unit.day
     
+    static func checkIfMessages() {
+            ParseHelper.getMessageCount(block: { (results: [PFObject]?) in
+                if results?.count != 0 {
+                    ParseHelper.hasMessages = true
+                }
+            })
+    }
+    
+    static func checkIfMessagesFromInbox(viewController: InboxViewController) {
+        ParseHelper.getMessageCount(block: { (results: [PFObject]?) in
+            if results?.count != 0 {
+                ParseHelper.hasMessages = true
+                viewController.tableView.reloadData()
+            }
+        })
+    }
+    
 }

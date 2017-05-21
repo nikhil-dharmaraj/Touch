@@ -14,7 +14,9 @@ class InboxMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var thankButton: UIButton!
     @IBOutlet weak var contactInfo: UILabel!
     @IBOutlet weak var messageImage: UIImageView!
-    
+    @IBOutlet weak var constraint: NSLayoutConstraint!
+    @IBOutlet weak var dot: UIImageView!
+    @IBOutlet weak var constraint2: NSLayoutConstraint!
 
     var message: PFObject? {
         didSet {
@@ -26,6 +28,12 @@ class InboxMessageTableViewCell: UITableViewCell {
                     self.thankButton.isHidden = false
                     self.thankButton.isSelected = message["thanked"] as! Bool
                     self.thankButton.isUserInteractionEnabled = !self.thankButton.isSelected
+                }
+                if message["alreadyRead"] != nil {
+                    self.dot.isHidden = true
+                }
+                else {
+                    self.dot.isHidden = false
                 }
                 let user = message["fromUser"] as! PFUser
                 
@@ -41,7 +49,8 @@ class InboxMessageTableViewCell: UITableViewCell {
                 let name = user["additional"] as! String
                 let text: String = "\(name) sent you a"
                 self.contactInfo.text = text
-                  message.saveInBackground()
+                message["alreadyRead"] = true
+                message.saveInBackground()
             }
         }
     }
